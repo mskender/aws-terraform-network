@@ -66,3 +66,23 @@ variable map_public_ips {
     type = string 
 
 }
+
+variable  private_subnets_per_az {
+
+    default = 1
+    type = number
+    description = "Number of private subnets to create per AZ."
+
+}
+variable    public_subnets_per_az {
+    default = 1
+    type = number
+    description = "Number of public subnets to create per AZ."
+
+}
+
+variable create_ssm_endpoint {
+    default = true
+    type = bool
+    description = "Whether to create SSM endpoint in VPC"
+}
