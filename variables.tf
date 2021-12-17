@@ -1,3 +1,9 @@
+variable region {
+
+    description = "Region in which to create resources."
+    type = string
+    default = "eu-west-1"
+}
 variable cidr {
     description = "Main CIDR which we'll carve up into subnets. One per region"
     type = string
@@ -6,6 +12,7 @@ variable cidr {
 
 variable create_igw {
     type=bool
+    default = true
     description = "Whether to create Internet Gateway and attach it to the VPC"
 }
 
@@ -28,8 +35,34 @@ variable subnet_size {
     default = 24
 }
 
-variable crete_natgw {
+variable create_natgw {
     
     type=bool
     description = "Whether to create NAT Gateway for private subnets and attach it to the VPC"
+}
+
+variable tags {
+
+    
+    default = null
+    description = "Tags to apply to all created objects (vpc, subnets, igw and natgw)"
+}
+
+variable prefix {
+    type = string
+    default = ""
+    description = "A string to prefix all resource names for easier sorting"
+}
+
+variable suffix {
+    type = string
+    default = ""
+    description = "A string to suffix all resource names."
+}
+
+variable map_public_ips {
+    description = "Map public IP's to resources in public subnets"
+    default = false
+    type = string 
+
 }
