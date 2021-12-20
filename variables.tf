@@ -18,7 +18,7 @@ variable create_igw {
 
 variable create_public_subnets {
     type = bool
-    description = "Whether to create public-facing, igw-attached subnets"
+    description = "Whether to create public-facing, igw-attached subnets. Also mandatory if you plan to use NAT gateways."
     default = false
 }
 
