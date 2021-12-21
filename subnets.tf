@@ -15,7 +15,9 @@ resource "aws_subnet" "private" {
     
     cidr_block = cidrsubnet(aws_vpc.main.cidr_block, local.subnet_cidr_size, count.index+1)
 
-    tags = { Name = "${var.prefix}-private-${split("-",element(data.aws_availability_zones.available.names, count.index))[2]}${local.suffix}" }
+    tags = merge(
+        { Name = "${var.prefix}-private-${split("-",element(data.aws_availability_zones.available.names, count.index))[2]}${local.suffix}" },
+        var.private_subnet_additional_tags)
     availability_zone = element(data.aws_availability_zones.available.names, count.index)
     
 }
@@ -29,7 +31,9 @@ resource "aws_subnet" "public" {
     
     cidr_block = cidrsubnet(aws_vpc.main.cidr_block, local.subnet_cidr_size, count.index+1+local.private_subnets_number)
 
-    tags = { Name = "${var.prefix}-public-${split("-",element(data.aws_availability_zones.available.names, count.index))[2]}${local.suffix}" }
+    tags = merge(
+        { Name = "${var.prefix}-public-${split("-",element(data.aws_availability_zones.available.names, count.index))[2]}${local.suffix}" },
+        var.public_subnet_additional_tags)
     availability_zone = element(data.aws_availability_zones.available.names, count.index)
     map_public_ip_on_launch = var.map_public_ips
 }

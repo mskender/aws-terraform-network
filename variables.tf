@@ -31,7 +31,7 @@ variable create_private_subnets {
 variable subnet_size {
 
     type = number
-    description = "CIDR (slash) size of (both) public and private subnets. Must be in range [18-28]"
+    description = "CIDR (slash) size of (both) public and private subnets. Must be smaller than CIDR subnet size, i.e. 24 for class C subnet."
     default = 24
 }
 
@@ -39,6 +39,7 @@ variable create_natgw {
     
     type=bool
     description = "Whether to create NAT Gateway for private subnets and attach it to the VPC"
+    default = false
 }
 
 variable tags {
@@ -85,4 +86,16 @@ variable create_ssm_endpoint {
     default = true
     type = bool
     description = "Whether to create SSM endpoint in VPC"
+}
+
+variable private_subnet_additional_tags {
+    type = map(any)
+    default = null
+    description = "Additional tags to be applied to private subnets, i.e. for purposes of EKS tagging."
+}
+
+variable public_subnet_additional_tags {
+    type = map(any)
+    default = null
+    description = "Additional tags to be applied to public subnets, i.e. for purposes of EKS tagging."
 }
