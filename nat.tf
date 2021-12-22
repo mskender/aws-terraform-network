@@ -16,9 +16,9 @@ resource "aws_route_table" "nat" {
 
     }
 
-      tags = {
+      tags = merge(var.tags,{
         "Name" = "${local.nat_rt_name}-${element(data.aws_availability_zones.available.names, count.index)}-${var.suffix}"
-  }
+  })
   }
 
 resource "aws_route_table_association" "nat" {
@@ -33,9 +33,9 @@ resource "aws_nat_gateway" "natgw" {
   allocation_id = aws_eip.natgw[count.index].id
   subnet_id     = aws_subnet.public[count.index].id
   
-  tags = {
+  tags = merge(var.tags, {
     "Name" = "${local.natgw_name}-${element(data.aws_availability_zones.available.names, count.index)}-${var.suffix}"
-  }
+  })
 
 
   depends_on = [
@@ -47,4 +47,7 @@ resource "aws_nat_gateway" "natgw" {
 resource "aws_eip" "natgw" {
   count = var.create_natgw && var.create_public_subnets ? length(aws_subnet.private) : 0
   vpc      = true
+  tags = merge(var.tags, {
+    "reserved_by" = "${local.natgw_name}-${element(data.aws_availability_zones.available.names, count.index)}-${var.suffix}"
+  })
 }

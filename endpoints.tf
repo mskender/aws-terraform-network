@@ -9,9 +9,9 @@ resource "aws_vpc_endpoint" "ssm" {
   ]
   subnet_ids = aws_subnet.private.*.id
   private_dns_enabled  = true
-  tags = {
+  tags = merge(var.tags, {
       "Name" = "${var.prefix}-ssm-endpoint${local.suffix}"
-  }
+  })
 }
 
 resource "aws_vpc_endpoint" "ec2messages" {
@@ -25,9 +25,9 @@ resource "aws_vpc_endpoint" "ec2messages" {
   ]
   subnet_ids = aws_subnet.private.*.id
   private_dns_enabled  = true
-  tags = {
+  tags = merge(var.tags, {
        "Name" = "${var.prefix}-ec2messages-endpoint${local.suffix}"
-  }
+  })
 }
 
 resource "aws_vpc_endpoint" "ssmmessages" {
@@ -41,7 +41,7 @@ resource "aws_vpc_endpoint" "ssmmessages" {
   ]
   subnet_ids = aws_subnet.private.*.id
   private_dns_enabled  = true
-    tags = {
+    tags = merge(var.tags, {
        "Name" = "${var.prefix}-ssmmessages-endpoint${local.suffix}"
-  }
+  })
 }

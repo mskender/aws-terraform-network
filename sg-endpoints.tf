@@ -26,7 +26,7 @@ resource "aws_security_group" "sgp_ssm_endpoints" {
     cidr_blocks = [aws_vpc.main.cidr_block]
   }
 
-  tags = {
+  tags = merge(var.tags, {
     Name = "${local.sgp_prefix}-outbound-default${local.suffix}"
-  }
+  })
 }

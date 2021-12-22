@@ -15,9 +15,9 @@ resource "aws_vpc" "main" {
     cidr_block = var.cidr
     enable_dns_hostnames = true
     enable_dns_support = true
-    tags =  { 
+    tags =  merge(var.tags, { 
       "Name" = local.vpc_name 
-    }
+    })
 
 }
 
@@ -25,9 +25,9 @@ resource "aws_vpc" "main" {
 resource "aws_internet_gateway" "gw1" {
   count = var.create_igw ? 1 : 0
   vpc_id = aws_vpc.main.id
-  tags = {
+  tags = merge(var.tags, {
     "Name" = local.igw_name
-  }
+  })
 }
 
 resource "aws_route_table" "gw1" {
@@ -41,9 +41,9 @@ resource "aws_route_table" "gw1" {
         gateway_id = aws_internet_gateway.gw1[count.index].id
 
     }
-  tags = {
+  tags = merge(var.tags, {
     "Name" = local.rt_name
-  }
+  })
 }
 
 resource "aws_main_route_table_association" "main" {
