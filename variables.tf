@@ -36,7 +36,7 @@ variable subnet_size {
 }
 
 variable create_natgw {
-    
+
     type=bool
     description = "Whether to create NAT Gateway for private subnets and attach it to the VPC"
     default = false
@@ -44,7 +44,7 @@ variable create_natgw {
 
 variable tags {
 
-    
+
     default = null
     description = "Tags to apply to all created objects (vpc, subnets, igw and natgw)"
 }
@@ -64,7 +64,7 @@ variable suffix {
 variable map_public_ips {
     description = "Map public IP's to resources in public subnets"
     default = false
-    type = string 
+    type = string
 
 }
 
@@ -85,7 +85,13 @@ variable    public_subnets_per_az {
 variable create_ssm_endpoint {
     default = true
     type = bool
-    description = "Whether to create SSM endpoint in VPC"
+    description = "Whether to create SSM endpoint in private subnets."
+}
+
+variable create_s3_endpoint {
+    default = true
+    type = bool
+    description = "Whether to create S3 endpoint in private subnets."
 }
 
 variable private_subnet_additional_tags {

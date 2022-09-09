@@ -1,9 +1,9 @@
 
 
-resource "aws_security_group" "sgp_ssm_endpoints" {
+resource "aws_security_group" "sgp_endpoints" {
 
   vpc_id = aws_vpc.main.id
-  name   = "${local.sgp_prefix}-ssm-endpoints${local.suffix}"
+  name   = "${local.sgp_prefix}-endpoints${local.suffix}"
 
   ingress {
     from_port   = 443

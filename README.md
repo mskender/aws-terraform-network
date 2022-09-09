@@ -39,12 +39,13 @@ No modules.
 | [aws_route_table.nat](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route_table) | resource |
 | [aws_route_table_association.gw1](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route_table_association) | resource |
 | [aws_route_table_association.nat](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route_table_association) | resource |
+| [aws_security_group.sgp_endpoints](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group) | resource |
 | [aws_security_group.sgp_outbound_default](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group) | resource |
-| [aws_security_group.sgp_ssm_endpoints](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group) | resource |
 | [aws_subnet.private](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/subnet) | resource |
 | [aws_subnet.public](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/subnet) | resource |
 | [aws_vpc.main](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc) | resource |
 | [aws_vpc_endpoint.ec2messages](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc_endpoint) | resource |
+| [aws_vpc_endpoint.s3](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc_endpoint) | resource |
 | [aws_vpc_endpoint.ssm](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc_endpoint) | resource |
 | [aws_vpc_endpoint.ssmmessages](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc_endpoint) | resource |
 | [aws_availability_zones.available](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/availability_zones) | data source |
@@ -58,7 +59,8 @@ No modules.
 | <a name="input_create_natgw"></a> [create\_natgw](#input\_create\_natgw) | Whether to create NAT Gateway for private subnets and attach it to the VPC | `bool` | `false` | no |
 | <a name="input_create_private_subnets"></a> [create\_private\_subnets](#input\_create\_private\_subnets) | Whether to create private subnets | `bool` | `false` | no |
 | <a name="input_create_public_subnets"></a> [create\_public\_subnets](#input\_create\_public\_subnets) | Whether to create public-facing, igw-attached subnets. Also mandatory if you plan to use NAT gateways. | `bool` | `false` | no |
-| <a name="input_create_ssm_endpoint"></a> [create\_ssm\_endpoint](#input\_create\_ssm\_endpoint) | Whether to create SSM endpoint in VPC | `bool` | `true` | no |
+| <a name="input_create_s3_endpoint"></a> [create\_s3\_endpoint](#input\_create\_s3\_endpoint) | Whether to create S3 endpoint in private subnets. | `bool` | `true` | no |
+| <a name="input_create_ssm_endpoint"></a> [create\_ssm\_endpoint](#input\_create\_ssm\_endpoint) | Whether to create SSM endpoint in private subnets. | `bool` | `true` | no |
 | <a name="input_map_public_ips"></a> [map\_public\_ips](#input\_map\_public\_ips) | Map public IP's to resources in public subnets | `string` | `false` | no |
 | <a name="input_prefix"></a> [prefix](#input\_prefix) | A string to prefix all resource names for easier sorting | `string` | `""` | no |
 | <a name="input_private_subnet_additional_tags"></a> [private\_subnet\_additional\_tags](#input\_private\_subnet\_additional\_tags) | Additional tags to be applied to private subnets, i.e. for purposes of EKS tagging. | `map(any)` | `null` | no |
