@@ -56,7 +56,7 @@ resource "aws_vpc_endpoint" "s3" {
       aws_security_group.sgp_endpoints.id
   ]
   subnet_ids = aws_subnet.private.*.id
-  private_dns_enabled  = true
+  private_dns_enabled  = false
   tags = merge(var.tags, {
       "Name" = "${var.prefix}-s3-endpoint${local.suffix}"
   })
