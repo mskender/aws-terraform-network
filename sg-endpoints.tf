@@ -27,6 +27,7 @@ resource "aws_security_group" "sgp_endpoints" {
   }
 
   tags = merge(var.tags, {
-    Name = "${local.sgp_prefix}-outbound-default${local.suffix}"
+    Name ="${local.sgp_prefix}-endpoints${local.suffix}"
+
   })
 }
