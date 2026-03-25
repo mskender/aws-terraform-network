@@ -46,7 +46,7 @@ resource "aws_nat_gateway" "natgw" {
 
 resource "aws_eip" "natgw" {
   count = var.create_natgw && var.create_public_subnets ? length(aws_subnet.private) : 0
-  vpc      = true
+  domain = "vpc"
   tags = merge(var.tags, {
     "reserved_by" = "${local.natgw_name}-${element(data.aws_availability_zones.available.names, count.index)}-${var.suffix}"
   })
